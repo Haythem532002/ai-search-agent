@@ -1,10 +1,10 @@
 from dotenv import load_dotenv
 from langchain.agents import create_tool_calling_agent, \
     AgentExecutor
-from langchain_core.output_parsers import PydanticOutputParser
+from langchain_core.output_parsers import \
+    PydanticOutputParser
 from pydantic import BaseModel
 from langchain_openai import ChatOpenAI
-from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
 
 from tools import search_tool, wiki_tool, \
@@ -12,15 +12,17 @@ from tools import search_tool, wiki_tool, \
 
 load_dotenv()
 
+
 class ResearchResponse(BaseModel):
     topic: str
     summary: str
     sources: list[str]
     tools_used: list[str]
-    
+
 
 llm = ChatOpenAI(model="gpt-4o")
-parser = PydanticOutputParser(pydantic_object=ResearchResponse)
+parser = PydanticOutputParser(
+    pydantic_object=ResearchResponse)
 
 prompt = ChatPromptTemplate.from_messages(
     [
@@ -36,9 +38,10 @@ prompt = ChatPromptTemplate.from_messages(
         ("human", "{query}"),
         ("placeholder", "{agent_scratchpad")
     ]
-).partial(format_instruction=parser.get_format_instructions())
+).partial(
+    format_instruction=parser.get_format_instructions())
 
-tools = [search_tool, wiki_tool,save_tool]
+tools = [search_tool, wiki_tool, save_tool]
 
 agent = create_tool_calling_agent(
     llm=llm,
@@ -52,13 +55,13 @@ agent_executor = AgentExecutor(
     verbose=True
 )
 
-raw_response = agent_executor.invoke({"query": "What is the capital of tunisia"})
-
-print(raw_response)
-
+raw_response = agent_executor.invoke(
+    {"query": "What is the capital of tunisia"})
 
 try:
-    parsed_response = parser.parse(raw_response.get("output")[0]["text"])
+    parsed_response = parser.parse(
+        raw_response.get("output")[0]["text"])
+    print(parsed_response)
 except Exception as e:
-    print("Error parsing response", e, "Raw Response : ", raw_response)
-
+    print("Error parsing response", e, "Raw Response : ",
+          raw_response)
