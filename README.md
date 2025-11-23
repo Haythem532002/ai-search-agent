@@ -20,6 +20,18 @@ An advanced AI-powered search and research agent that leverages multiple tools i
 - ⚡ **OpenAI GPT-4o** - Powered by the latest OpenAI language model
 - 🕒 **Timestamped Outputs** - Automatic timestamp tracking for research sessions
 
+## 📷 Screenshots
+
+Example screenshots (stored in `imgs/`):
+
+<p align="center">
+    <img src="imgs/Capture d'écran 2025-11-23 171403.png" alt="Agent Screenshot 1" style="max-width:100%;height:auto" />
+</p>
+
+<p align="center">
+    <img src="imgs/Capture d'écran 2025-11-23 171414.png" alt="Agent Screenshot 2" style="max-width:100%;height:auto" />
+</p>
+
 ## 🛠️ Tech Stack
 
 **Backend:** Python 3.8+, LangChain, OpenAI GPT-4o  
