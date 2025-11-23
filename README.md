@@ -166,42 +166,6 @@ AI-Search-Agent/
 
 Note: Prefer running `app.py` as the primary server (`python app.py`). If `main.py` exists it may be an older/duplicate server — run only one server to avoid port conflicts.
 
-## 🔧 Configuration
-
-### Tool Customization
-
-The [`tools.py`](tools.py) file contains three main tools:
-
-- **[`search_tool`](tools.py)** - DuckDuckGo web search
-- **[`wiki_tool`](tools.py)** - Wikipedia content retrieval
-
-### Agent Customization
-
-Modify the system prompt in [`main.py`](main.py) to change the agent's behavior:
-
-```python
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "Your custom system prompt here..."),
-    ("placeholder", "{chat_history}"),
-    ("human", "{query}"),
-    ("placeholder", "{agent_scratchpad}")
-])
-```
-
-### Output Customization
-
-The [`ResearchResponse`](main.py) Pydantic model can be extended:
-
-```python
-class ResearchResponse(BaseModel):
-    topic: str
-    summary: str
-    sources: list[str]
-    tools_used: list[str]
-    confidence_score: float  # Add custom fields
-    research_depth: str      # Add custom fields
-```
-
 ## 🧪 Testing
 
 ### Run Basic Tests
