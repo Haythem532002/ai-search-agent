@@ -14,22 +14,27 @@ An advanced AI-powered search and research agent that leverages multiple tools i
 - 🧠 **Intelligent Research** - Multi-source research using web search and Wikipedia
 - 🔍 **Web Search Integration** - Real-time web search via DuckDuckGo
 - 📚 **Wikipedia Integration** - Comprehensive encyclopedia lookup
-- 💾 **Auto-Save Results** - Automatic research output saving to text files
 - 🤖 **Tool-Calling Agent** - Advanced LangChain agent with structured outputs
 - 📊 **Structured Responses** - Pydantic-based response formatting with validation
-- ⚡ **OpenAI GPT-4o** - Powered by the latest OpenAI language model
-- 🕒 **Timestamped Outputs** - Automatic timestamp tracking for research sessions
 
 ## 📷 Screenshots
 
 Example screenshots (stored in `imgs/`):
 
 <p align="center">
+    <img src="imgs/Capture d'écran 2025-11-23 171414.png" alt="Agent Screenshot 2" style="max-width:100%;height:auto" />
+</p>
+
+<p align="center">
     <img src="imgs/Capture d'écran 2025-11-23 171403.png" alt="Agent Screenshot 1" style="max-width:100%;height:auto" />
 </p>
 
 <p align="center">
-    <img src="imgs/Capture d'écran 2025-11-23 171414.png" alt="Agent Screenshot 2" style="max-width:100%;height:auto" />
+    <img src="imgs/Capture d'écran 2025-11-23 182201.png" alt="Agent Screenshot 1" style="max-width:100%;height:auto" />
+</p>
+
+<p align="center">
+    <img src="imgs/Capture d'écran 2025-11-23 182212.png" alt="Agent Screenshot 2" style="max-width:100%;height:auto" />
 </p>
 
 ## 🛠️ Tech Stack
@@ -37,7 +42,6 @@ Example screenshots (stored in `imgs/`):
 **Backend:** Python 3.8+, LangChain, OpenAI GPT-4o  
 **Search Tools:** DuckDuckGo Search, Wikipedia API  
 **Data Processing:** Pydantic for structured outputs and validation  
-**File Operations:** Automated text file generation with timestamps  
 **Agent Framework:** LangChain tool-calling agent architecture
 
 ## 🏗️ Agent Architecture
@@ -48,7 +52,6 @@ The system uses a sophisticated tool-calling agent architecture built with LangC
 
 - **🤖 LangChain Agent** - Tool-calling agent with GPT-4o integration
 - **🔍 Search Tools** - Web search and Wikipedia lookup capabilities
-- **💾 File Operations** - Automated research output saving with timestamps
 - **� Structured Output** - Pydantic models for consistent response formatting
 - **🎯 Prompt Engineering** - Optimized prompts for research tasks
 
@@ -56,7 +59,6 @@ The system uses a sophisticated tool-calling agent architecture built with LangC
 
 1. **🌐 Web Search** - [`DuckDuckGoSearchRun`](tools.py) for real-time web information
 2. **📖 Wikipedia** - [`WikipediaQueryRun`](tools.py) for encyclopedia content
-3. **💾 File Saver** - [`save_to_txt`](tools.py) for automatic output preservation
 
 ### Data Flow
 
@@ -64,8 +66,7 @@ The system uses a sophisticated tool-calling agent architecture built with LangC
 2. **🤖 Agent Processing** - LangChain agent analyzes query and selects appropriate tools
 3. **� Information Gathering** - Tools execute searches and retrieve relevant data
 4. **📊 Response Generation** - GPT-4o synthesizes information into structured output
-5. **💾 Auto-Save** - Research results automatically saved to timestamped file
-6. **📋 Structured Output** - Results returned in standardized ResearchResponse format
+5. **📋 Structured Output** - Results returned in standardized ResearchResponse format
 
 ### Response Schema
 
@@ -150,16 +151,20 @@ queries = [
 
 ```
 AI-Search-Agent/
-├── main.py                        # Main application entry point
+├── app.py                         # Flask API server (primary backend)
+├── main.py                        # Legacy or alternate entrypoint (may be duplicate)
 ├── tools.py                       # Tool definitions and implementations
+├── my-app/                        # Next.js frontend application
+├── imgs/                          # Example screenshots and images
 ├── requirements.txt               # Python dependencies
-├── .env                          # Environment variables (API keys)
-├── .gitignore                    # Git ignore configuration
-├── Research_Output.txt           # Generated research outputs
-├── venv/                         # Python virtual environment
-├── __pycache__/                  # Python cache files
-└── README.md                     # Project documentation
+├── .env                           # Environment variables (API keys) - not committed
+├── .gitignore                     # Git ignore configuration
+├── README.md                      # Project documentation
+├── venv/                          # Python virtual environment (optional)
+└── .git/                          # Git repository metadata
 ```
+
+Note: Prefer running `app.py` as the primary server (`python app.py`). If `main.py` exists it may be an older/duplicate server — run only one server to avoid port conflicts.
 
 ## 🔧 Configuration
 
@@ -169,7 +174,6 @@ The [`tools.py`](tools.py) file contains three main tools:
 
 - **[`search_tool`](tools.py)** - DuckDuckGo web search
 - **[`wiki_tool`](tools.py)** - Wikipedia content retrieval
-- **[`save_tool`](tools.py)** - File output with timestamps
 
 ### Agent Customization
 
